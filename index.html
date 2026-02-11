@@ -1,61 +1,270 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plank-Pro - Aplikacja do ćwiczeń</title>
+    <title>Plank-Pro | Master Your Core</title>
     <style>
-        /* Styl strony - nowoczesny i czysty */
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; }
-        .header { background: #2c3e50; color: white; padding: 20px 0; text-align: center; }
-        .hero { background: linear-gradient(135deg, #2c3e50, #3498db); color: white; padding: 60px 20px; text-align: center; }
-        .hero h1 { margin: 0; font-size: 2.5em; }
-        .hero p { font-size: 1.2em; opacity: 0.9; }
-        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; }
-        .feature-box { background: #f9f9f9; padding: 20px; border-radius: 8px; text-align: center; border: 1px solid #eee; }
-        .footer { background: #222; color: #aaa; text-align: center; padding: 40px 20px; margin-top: 50px; font-size: 0.9em; }
-        .footer a { color: white; text-decoration: none; font-weight: bold; }
-        .btn { display: inline-block; background: white; color: #333; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: bold; margin-top: 20px; }
+        :root {
+            --bg-color: #000000;
+            --card-bg: #1c1c1e;
+            --text-main: #f5f5f7;
+            --text-secondary: #86868b;
+            --accent: #2997ff; /* Apple Blue */
+            --accent-glow: rgba(41, 151, 255, 0.4);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-left: 20px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeIn 1s ease-out;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(180deg, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        /* App Store Button */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            background: var(--accent);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        /* CSS Phone Mockup */
+        .phone-container {
+            margin-top: 60px;
+            display: flex;
+            justify-content: center;
+            perspective: 1000px;
+        }
+
+        .phone-mockup {
+            width: 280px;
+            height: 580px;
+            background: #000;
+            border-radius: 40px;
+            border: 8px solid #333;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Screen content simulation */
+        .screen-content {
+            text-align: center;
+            color: white;
+        }
+        .timer-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 6px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        /* Features Grid */
+        .features {
+            max-width: 1000px;
+            margin: 80px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.4rem;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid #333;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .contact-email {
+            margin-top: 20px;
+            color: var(--text-main);
+            font-weight: bold;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Hide nav links on mobile */
+        }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <strong>Plank-Pro</strong>
-    </div>
+    <nav>
+        <div class="logo">Plank-Pro</div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="mailto:contact@example.com">Support</a>
+        </div>
+    </nav>
 
-    <div class="hero">
-        <h1>Twój idealny czas na deskę.</h1>
-        <p>Prosta. Bez reklam. 100% Prywatna.</p>
-        <a href="#" class="btn">Pobierz w App Store</a>
-    </div>
+    <section class="hero">
+        <h1>Master Your Core.<br>Respect Your Data.</h1>
+        <p class="subtitle">The simple, private plank timer designed for focus.</p>
+        
+        <!-- Zmień href na swój link do App Store gdy już go będziesz mieć -->
+        <a href="#" class="download-btn">
+            Download on the App Store
+        </a>
 
-    <div class="container">
-        <h2 style="text-align: center;">Główne funkcje</h2>
-        <div class="features">
-            <div class="feature-box">
-                <h3>⏱️ Stoper</h3>
-                <p>Ustaw idealny czas i skup się na ćwiczeniu.</p>
-            </div>
-            <div class="feature-box">
-                <h3>🔒 Prywatność</h3>
-                <p>Brak logowania. Wszystkie dane zostają na telefonie.</p>
-            </div>
-            <div class="feature-box">
-                <h3>📈 Statystyki</h3>
-                <p>Śledź swoją historię i postępy lokalnie.</p>
+        <!-- CSS Phone Animation (Wizualizacja aplikacji) -->
+        <div class="phone-container">
+            <div class="phone-mockup">
+                <div class="screen-content">
+                    <div class="timer-circle">01:30</div>
+                    <p style="color: #888; font-size: 0.9rem;">PLANKING</p>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="footer">
-        <p>Potrzebujesz pomocy? Napisz do nas:</p>
-        <p><strong>[TUTAJ WPISZ SWÓJ EMAIL]</strong></p> <br>
-        <p>
-            <a href="privacy.html">Polityka Prywatności</a> | &copy; 2026 Plank-Pro
+    <section id="features" class="features">
+        <div class="card">
+            <h3>⏱️ Custom Timer</h3>
+            <p>Set your exact duration. A distraction-free interface built specifically for planking exercises.</p>
+        </div>
+        <div class="card">
+            <h3>🔒 100% Private</h3>
+            <p>No login required. No servers. Your workout history and statistics stay only on your device.</p>
+        </div>
+        <div class="card">
+            <h3>📈 Offline Stats</h3>
+            <p>Track your progress over time with built-in history and charts, completely offline.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">Home</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="mailto:capybaradesign.official@gmail.com">Support</a>
+        </div>
+        <div class="contact-email">
+            Need help? Email: capybaradesign.official@gmail.com
+        </div>
+        <p style="color: #444; font-size: 0.8rem; margin-top: 30px;">
+            &copy; 2026 Plank-Pro. All rights reserved.
         </p>
-    </div>
+    </footer>
 
 </body>
 </html>
